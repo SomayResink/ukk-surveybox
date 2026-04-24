@@ -19,47 +19,47 @@
 </div>
 
 <!-- Statistics Cards -->
-<div class="row mb-4">
-    <div class="col-lg-3 col-md-6 mb-3">
+<div class="mb-4 row">
+    <div class="mb-3 col-lg-3 col-md-6">
         <div class="card stat-card">
             <div class="card-body position-relative">
                 <div class="stat-icon">
                     <i class="fas fa-envelope"></i>
                 </div>
-                <h6 class="text-muted mb-2">Total Aspirasi</h6>
+                <h6 class="mb-2 text-muted">Total Aspirasi</h6>
                 <h2 class="mb-0">{{ $stats['total'] }}</h2>
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-6 mb-3">
+    <div class="mb-3 col-lg-3 col-md-6">
         <div class="card stat-card">
             <div class="card-body position-relative">
                 <div class="stat-icon">
                     <i class="fas fa-clock"></i>
                 </div>
-                <h6 class="text-muted mb-2">Menunggu</h6>
+                <h6 class="mb-2 text-muted">Menunggu</h6>
                 <h2 class="mb-0 text-warning">{{ $stats['pending'] }}</h2>
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-6 mb-3">
+    <div class="mb-3 col-lg-3 col-md-6">
         <div class="card stat-card">
             <div class="card-body position-relative">
                 <div class="stat-icon">
                     <i class="fas fa-spinner"></i>
                 </div>
-                <h6 class="text-muted mb-2">Diproses</h6>
+                <h6 class="mb-2 text-muted">Diproses</h6>
                 <h2 class="mb-0 text-info">{{ $stats['processed'] }}</h2>
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-6 mb-3">
+    <div class="mb-3 col-lg-3 col-md-6">
         <div class="card stat-card">
             <div class="card-body position-relative">
                 <div class="stat-icon">
                     <i class="fas fa-check-circle"></i>
                 </div>
-                <h6 class="text-muted mb-2">Selesai</h6>
+                <h6 class="mb-2 text-muted">Selesai</h6>
                 <h2 class="mb-0 text-success">{{ $stats['resolved'] }}</h2>
             </div>
         </div>
@@ -67,8 +67,8 @@
 </div>
 
 <!-- Charts Row -->
-<div class="row mb-4">
-    <div class="col-lg-6 mb-3">
+<div class="mb-4 row">
+    <div class="mb-3 col-lg-6">
         <div class="card chart-card">
             <div class="card-header">
                 <h6 class="mb-0"><i class="fas fa-chart-pie"></i> Status Aspirasi</h6>
@@ -78,7 +78,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6 mb-3">
+    <div class="mb-3 col-lg-6">
         <div class="card chart-card">
             <div class="card-header">
                 <h6 class="mb-0"><i class="fas fa-chart-bar"></i> Aspirasi per Kategori</h6>
@@ -106,11 +106,16 @@
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
                         <h6 class="mb-1">{{ $complaint->title }}</h6>
-                        <p class="text-muted small mb-1">
+                        <p class="mb-1 text-muted small">
                             <i class="fas fa-tag"></i> {{ ucfirst($complaint->category->name) }}
                             <span class="mx-2">•</span>
                             <i class="fas fa-calendar"></i> {{ $complaint->created_at->diffForHumans() }}
                         </p>
+                        @if($complaint->location)
+                            <p class="mb-1 text-muted small">
+                                <i class="fas fa-map-marker-alt"></i> Lokasi: {{ $complaint->location }}
+                            </p>
+                        @endif
                     </div>
                     <span class="status-badge
                         @if($complaint->status == 'pending') bg-warning text-dark
@@ -122,16 +127,16 @@
                 </div>
                 <p class="mt-2 mb-2">{{ Str::limit($complaint->content, 100) }}</p>
                 @if($complaint->feedback)
-                    <div class="mt-2 p-2 bg-light rounded">
+                    <div class="p-2 mt-2 rounded bg-light">
                         <small class="text-primary"><i class="fas fa-reply"></i> Feedback: </small>
                         <small>{{ Str::limit($complaint->feedback->message, 100) }}</small>
                     </div>
                 @endif
             </div>
         @empty
-            <div class="text-center py-5">
+            <div class="py-5 text-center">
                 <i class="fas fa-inbox fa-3x text-muted"></i>
-                <p class="text-muted mt-2">Belum ada aspirasi. Buat aspirasi pertama Anda!</p>
+                <p class="mt-2 text-muted">Belum ada aspirasi. Buat aspirasi pertama Anda!</p>
                 <button class="btn btn-gradient" data-bs-toggle="modal" data-bs-target="#addAspirasiModal">
                     <i class="fas fa-plus"></i> Buat Aspirasi
                 </button>

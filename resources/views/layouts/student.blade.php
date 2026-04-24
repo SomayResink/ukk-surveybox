@@ -216,7 +216,7 @@
 
             <!-- User Dropdown -->
             <div class="dropdown ms-3">
-                <button class="btn btn-link text-white dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                <button class="text-white btn btn-link dropdown-toggle" type="button" data-bs-toggle="dropdown">
                     <i class="fas fa-user-circle fa-lg"></i> {{ Auth::user()->name }}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-custom">
@@ -271,7 +271,7 @@
 <div class="modal fade" id="addAspirasiModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-gradient-primary text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
                 <h5 class="modal-title">
                     <i class="fas fa-paper-plane"></i> Buat Aspirasi Baru
                 </h5>
@@ -281,20 +281,28 @@
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Kategori Aspirasi</label>
+                        <label class="form-label">Kategori Aspirasi <span class="text-danger">*</span></label>
                         <select name="category_id" class="form-select" required>
                             <option value="">Pilih Kategori</option>
-                            @foreach($categories ?? [] as $category)
+                            @foreach(\App\Models\Category::all() as $category)
                                 <option value="{{ $category->id }}">{{ ucfirst($category->name) }}</option>
                             @endforeach
                         </select>
                     </div>
+
                     <div class="mb-3">
-                        <label class="form-label">Judul</label>
+                        <label class="form-label">Judul <span class="text-danger">*</span></label>
                         <input type="text" name="title" class="form-control" required placeholder="Masukkan judul aspirasi">
                     </div>
+
                     <div class="mb-3">
-                        <label class="form-label">Deskripsi</label>
+                        <label class="form-label">Lokasi <span class="text-muted">(opsional)</span></label>
+                        <input type="text" name="location" class="form-control" placeholder="Contoh: Kelas X RPL 1 , Laboratorium Komputer, Lapangan, Kantin, dll">
+                        <small class="text-muted">Isi lokasi kejadian (wajib)</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Deskripsi <span class="text-danger">*</span></label>
                         <textarea name="content" rows="5" class="form-control" required placeholder="Jelaskan aspirasi Anda secara detail"></textarea>
                     </div>
                 </div>

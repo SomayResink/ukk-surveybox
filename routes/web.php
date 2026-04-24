@@ -51,11 +51,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('complaint/{complaint}', [AdminController::class, 'showComplaint'])->name('admin.complaint.show');
 });
 
-// Super Admin Routes
 Route::middleware(['auth'])->prefix('superadmin')->group(function () {
     Route::get('dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
-    // Route::get('create-admin', [SuperAdminController::class, 'createAdminForm'])->name('superadmin.create-admin');
-    Route::post('create-admin', [SuperAdminController::class, 'createAdmin']);
+    Route::post('create-admin', [SuperAdminController::class, 'createAdmin'])->name('superadmin.create-admin');
     Route::post('create-category', [SuperAdminController::class, 'createCategory'])->name('superadmin.create-category');
     Route::get('complaints', [SuperAdminController::class, 'allComplaints'])->name('superadmin.complaints');
     Route::delete('admin/{admin}', [SuperAdminController::class, 'deleteAdmin'])->name('superadmin.delete-admin');

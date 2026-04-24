@@ -15,6 +15,7 @@ class Complaint extends Model
         'category_id',
         'title',
         'content',
+        'location',
         'status'
     ];
 

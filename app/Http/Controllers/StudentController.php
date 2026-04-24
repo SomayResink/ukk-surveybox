@@ -71,6 +71,7 @@ class StudentController extends Controller
             'category_id' => 'required|exists:categories,id',
             'title' => 'required|string|max:200',
             'content' => 'required|string',
+            'location' => 'nullable|string|max:100',
         ]);
 
         Complaint::create([
@@ -78,6 +79,7 @@ class StudentController extends Controller
             'category_id' => $request->category_id,
             'title' => $request->title,
             'content' => $request->content,
+            'location' => $request->location,
             'status' => 'pending',
         ]);
 

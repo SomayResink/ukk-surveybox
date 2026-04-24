@@ -1,54 +1,65 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Login dengan NIS atau Email') }}
+    <div class="mb-4 text-center">
+        <h4>Selamat Datang!</h4>
+        <p class="text-muted">Silakan login untuk melanjutkan</p>
     </div>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- NIS atau Email -->
-        <div>
-            <x-input-label for="login" :value="__('NIS atau Email')" />
-            <x-text-input id="login" class="block mt-1 w-full" type="text" name="login" :value="old('login')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('login')" class="mt-2" />
+        <div class="mb-3">
+            <label for="login" class="form-label">NIS atau Email</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fas fa-envelope"></i>
+                </span>
+                <input id="login" type="text" class="form-control" name="login"
+                       value="{{ old('login') }}" required autofocus
+                       placeholder="Masukkan NIS atau Email">
+            </div>
+            <small class="text-muted">Masukkan NIS atau Email yang terdaftar</small>
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fas fa-lock"></i>
+                </span>
+                <input id="password" type="password" class="form-control"
+                       name="password" required placeholder="Masukkan password">
+            </div>
         </div>
 
         <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="remember_me" name="remember">
+            <label class="form-check-label" for="remember_me">
+                Ingat saya
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+        <div class="gap-2 d-grid">
+            <button type="submit" class="btn-auth">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
         </div>
 
         <div class="mt-4 text-center">
-            <a href="{{ route('register') }}" class="text-sm text-indigo-600 hover:text-indigo-500">
-                Belum punya akun? Daftar sebagai siswa
+            <span class="text-muted">Belum punya akun?</span>
+            <a href="{{ route('register') }}" class="btn-link-custom ms-1">
+                Daftar sebagai Siswa
             </a>
         </div>
+
+        @if (Route::has('password.request'))
+            <div class="mt-2 text-center">
+                <a href="{{ route('password.request') }}" class="btn-link-custom small">
+                    Lupa password?
+                </a>
+            </div>
+        @endif
     </form>
 </x-guest-layout>
